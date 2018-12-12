@@ -13,6 +13,7 @@ import { reducers, metaReducers } from './reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { LaunchEffects } from './reducers/launch.effects';
 import { StatusEffects } from './reducers/status.effects';
+import { TitleService } from './title.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { StatusEffects } from './reducers/status.effects';
     EffectsModule.forRoot([LaunchEffects, StatusEffects]),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [ProviderService],
+  providers: [ProviderService, TitleService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
