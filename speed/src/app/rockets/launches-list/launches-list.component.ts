@@ -24,4 +24,8 @@ export class LaunchesListComponent {
       });
   }
 
+  getLaunchLink(launch: Launch) {
+    return ['/rockets', 'launch', launch.id];
+  }
+
 }

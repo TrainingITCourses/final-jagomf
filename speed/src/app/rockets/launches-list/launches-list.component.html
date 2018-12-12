@@ -1,5 +1,5 @@
 <ul>
   <li *ngFor="let launch of filteredList">
-    <span>{{launch.name}}</span>
+    <a [routerLink]="getLaunchLink(launch)">{{launch.name}}</a>
   </li>
 </ul>
