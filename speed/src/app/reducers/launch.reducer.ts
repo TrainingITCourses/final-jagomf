@@ -1,5 +1,4 @@
-import { Action } from '@ngrx/store';
-import { LaunchActionTypes } from './launch.actions';
+import { LaunchActionTypes, LaunchActions } from './launch.actions';
 import { Launch } from '../models/launch';
 
 
@@ -11,10 +10,12 @@ export const initialState: State = {
   launches: []
 };
 
-export function reducer(state = initialState, action: Action): State {
+export function reducer(state = initialState, action: LaunchActions): State {
   switch (action.type) {
     case LaunchActionTypes.LoadLaunchs:
       return { ...state };
+    case LaunchActionTypes.LaunchesLoaded:
+      return action.payload;
     default:
       return state;
   }
