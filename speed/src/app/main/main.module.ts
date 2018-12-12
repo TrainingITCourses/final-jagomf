@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { MainRoutingModule } from './main-routing.module';
 import { HomePageComponent } from './home-page/home-page.component';
+import { StatusListComponent } from './status-list/status-list.component';
 
 @NgModule({
   imports: [
-    CommonModule,
-    MainRoutingModule
+    CommonModule
   ],
-  declarations: [HomePageComponent]
+  declarations: [
+    HomePageComponent,
+    StatusListComponent
+  ]
 })
 export class MainModule { }
