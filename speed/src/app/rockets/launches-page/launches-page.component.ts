@@ -5,6 +5,7 @@ import { forkJoin } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { State } from '../../reducers';
 import { map } from 'rxjs/operators';
+import { TitleService } from '../../title.service';
 
 @Component({
   selector: 'app-launches-page',
@@ -15,6 +16,7 @@ export class LaunchesPageComponent implements OnInit {
 
   constructor(
     private globalStore: Store<State>,
+    private titleService: TitleService,
     private route: ActivatedRoute
   ) { }
 
@@ -26,6 +28,7 @@ export class LaunchesPageComponent implements OnInit {
     forkJoin([routeParams$, launches$])
       .subscribe(([{ launch: launchId }, { launches }]) => {
         this.launch = launches.find(launch => launch.id === launchId);
+        this.titleService.setTitle(`Lanzamiento: ${this.launch.name}`);
       });
   }
 
