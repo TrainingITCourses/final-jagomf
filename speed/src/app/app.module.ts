@@ -5,8 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { MainModule } from './main/main.module';
 import { ProviderService } from './provider.service';
+import { StoreModule } from '@ngrx/store';
+import { reducers, metaReducers } from './reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { LaunchEffects } from './reducers/launch.effects';
+import { StatusEffects } from './reducers/status.effects';
 
 @NgModule({
   declarations: [
@@ -14,8 +20,12 @@ import { ProviderService } from './provider.service';
   ],
   imports: [
     BrowserModule,
+    StoreModule,
     AppRoutingModule,
     MainModule,
+    StoreModule.forRoot(reducers, { metaReducers }),
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
+    EffectsModule.forRoot([LaunchEffects, StatusEffects]),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [ProviderService],
