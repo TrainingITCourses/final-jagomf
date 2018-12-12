@@ -1,3 +1,15 @@
+<p>Lanzamientos para el estado actual: <strong>{{launches.length}}</strong></p>
+
 <p>
-  status-page works!
+  Ordenar lanzamientos por fecha:<br/>
+  <app-sort-buttons (sortChanged)="sorted($event)"></app-sort-buttons>
 </p>
+
+<app-launches-list
+  *ngIf="launches && launches.length && status; else loading"
+  [list]="launches"
+  [status]="status"
+  [sort]="order">
+</app-launches-list>
+
+<ng-template #loading><p>Cargando lanzamientos...</p></ng-template>
