@@ -1,3 +1,5 @@
-<p>
-  status-list works!
-</p>
+<ul>
+  <li *ngFor="let status of list">
+    <a [routerLink]="getStatusLink(status)">{{status.name}}</a>
+  </li>
+</ul>

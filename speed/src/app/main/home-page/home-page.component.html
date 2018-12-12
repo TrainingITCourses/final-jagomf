@@ -1,3 +1,6 @@
-<p>
-  home-page works!
-</p>
+<p>Estados:</p>
+
+<app-status-list [list]="statuses" *ngIf="statuses && statuses.length; else loading">
+</app-status-list>
+
+<ng-template #loading><p>Cargando estados...</p></ng-template>
