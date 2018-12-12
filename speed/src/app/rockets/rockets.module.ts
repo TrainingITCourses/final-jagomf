@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { RocketsRoutingModule } from './rockets-routing.module';
 import { StatusPageComponent } from './status-page/status-page.component';
 import { LaunchesPageComponent } from './launches-page/launches-page.component';
-import { LaunchDetailComponent } from './launch-detail/launch-detail.component';
 import { LaunchesListComponent } from './launches-list/launches-list.component';
 import { SortButtonsComponent } from './sort-buttons/sort-buttons.component';
 
@@ -13,6 +12,6 @@ import { SortButtonsComponent } from './sort-buttons/sort-buttons.component';
     CommonModule,
     RocketsRoutingModule
   ],
-  declarations: [StatusPageComponent, LaunchesPageComponent, LaunchDetailComponent, LaunchesListComponent, SortButtonsComponent]
+  declarations: [StatusPageComponent, LaunchesPageComponent, LaunchesListComponent, SortButtonsComponent]
 })
 export class RocketsModule { }

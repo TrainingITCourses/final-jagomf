@@ -1,3 +1,10 @@
-<p>
-  launches-page works!
-</p>
+<p>Lanzamiento:</p>
+
+<div *ngIf="launch; else loading">
+  <ul>
+    <li>Nombre: {{launch.name}}</li>
+    <li>más detalles...</li>
+  </ul>
+</div>
+
+<ng-template><p>Cargando detalles...</p></ng-template>
