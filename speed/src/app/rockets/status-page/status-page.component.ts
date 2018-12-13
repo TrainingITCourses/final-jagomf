@@ -19,7 +19,7 @@ import { takeUntil } from 'rxjs/operators';
 export class StatusPageComponent implements OnInit, OnDestroy {
 
   order: SORT_LAUNCHES = SORT_LAUNCHES.ascending;
-  launches: Launch[] = [];
+  launches: Launch[];
   status;
   ngUnsubscribe: Subject<void>;
 
@@ -51,16 +51,24 @@ export class StatusPageComponent implements OnInit, OnDestroy {
     this.globalStore.dispatch(new LoadLaunchs());
   }
 
-  observeValues() {
+  get thisStateLaunches() {
+    return this.launches && this.launches.length && this.status
+      ? this.launches.filter(launch => launch.status === this.status) : [];
+  }
+
+  private observeValues() {
     const launch$ = this.globalStore.select('launch');
     const status$ = this.globalStore.select('status');
     const routeParams$ = this.route.params;
     combineLatest(launch$, status$, routeParams$).pipe(takeUntil(this.ngUnsubscribe)).subscribe(
       ([{ launches }, { statuses }, { status: currentStatusId }]) => {
-        this.launches = [ ...launches ];
-        this.status = currentStatusId;
-        const currentStatus = statuses.find(eachStat => eachStat.id === this.status);
-        this.titleService.setTitle(`Estado: ${currentStatus.name}`);
+        if (launches.length) {
+          this.launches = [ ...launches ];
+          this.status = +currentStatusId;
+          const currentStatus = statuses.find(eachStat => eachStat.id === this.status);
+          this.titleService.setTitle(`Estado: ${currentStatus.name}`);
+          this.cdr.detectChanges();
+        }
       });
   }
 
