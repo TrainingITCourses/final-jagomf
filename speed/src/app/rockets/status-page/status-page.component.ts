@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { LoadLaunchs } from '../../reducers/launch.actions';
 import { Store } from '@ngrx/store';
 import { State } from '../../reducers';
@@ -7,31 +7,46 @@ import { Launch } from '../../models/launch';
 import { SORT_LAUNCHES } from '../sort-buttons/sort-buttons.component';
 import { TitleService } from '../../title.service';
 import { LoadStatuss } from '../../reducers/status.actions';
-import { combineLatest } from 'rxjs';
+import { combineLatest, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-status-page',
   templateUrl: './status-page.component.html',
   styleUrls: ['./status-page.component.css']
 })
-export class StatusPageComponent implements OnInit {
+export class StatusPageComponent implements OnInit, OnDestroy {
 
   order: SORT_LAUNCHES = SORT_LAUNCHES.ascending;
   launches: Launch[] = [];
   status;
+  ngUnsubscribe: Subject<void>;
 
   constructor(
     private route: ActivatedRoute,
+    private cdr: ChangeDetectorRef,
     private titleService: TitleService,
     private globalStore: Store<State>
-  ) { }
+  ) {
+    this.ngUnsubscribe = new Subject();
+  }
 
   ngOnInit() {
     this.loadValues();
     this.observeValues();
   }
 
-  loadValues() {
+  ngOnDestroy() {
+    this.finishSubscriptions();
+  }
+
+  private finishSubscriptions() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
+
+  private loadValues() {
     this.globalStore.dispatch(new LoadStatuss());
     this.globalStore.dispatch(new LoadLaunchs());
   }
