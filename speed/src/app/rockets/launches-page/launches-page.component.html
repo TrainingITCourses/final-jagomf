@@ -2,9 +2,12 @@
 
 <div *ngIf="launch; else loading">
   <ul>
-    <li>Nombre: {{launch.name}}</li>
-    <li>más detalles...</li>
+    <li>Nombre completo: {{launch.name}}</li>
+    <li>Fecha: {{launch.net | date}}</li>
+    <li>Cohete: {{launch.rocket?.name}}</li>
+    <li>País de lanzamiento: {{launch.location?.countryCode}}</li>
+    <li>Agencia: {{launch.rocket?.agencies[0]?.name}}</li>
   </ul>
 </div>
 
-<ng-template><p>Cargando detalles...</p></ng-template>
+<ng-template #loading><p>Cargando detalles...</p></ng-template>
