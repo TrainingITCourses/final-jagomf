@@ -15,7 +15,7 @@ export function reducer(state = initialState, action: StatusActions): State {
     case StatusActionTypes.LoadStatuss:
       return { ...state };
     case StatusActionTypes.StatusesLoaded:
-      return action.payload;
+      return { statuses: action.payload };
     default:
       return state;
   }
