@@ -14,6 +14,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { LaunchEffects } from './reducers/launch.effects';
 import { StatusEffects } from './reducers/status.effects';
 import { TitleService } from './title.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { TitleService } from './title.service';
     BrowserModule,
     StoreModule,
     AppRoutingModule,
+    HttpClientModule,
     MainModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
