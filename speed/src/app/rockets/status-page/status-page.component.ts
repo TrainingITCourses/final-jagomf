@@ -7,7 +7,7 @@ import { Launch } from '../../models/launch';
 import { SORT_LAUNCHES } from '../sort-buttons/sort-buttons.component';
 import { TitleService } from '../../title.service';
 import { LoadStatuss } from '../../reducers/status.actions';
-import { forkJoin } from 'rxjs';
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'app-status-page',
@@ -40,7 +40,7 @@ export class StatusPageComponent implements OnInit {
     const launch$ = this.globalStore.select('launch');
     const status$ = this.globalStore.select('status');
     const routeParams$ = this.route.params;
-    forkJoin([launch$, status$, routeParams$]).subscribe(
+    combineLatest(launch$, status$, routeParams$).pipe(takeUntil(this.ngUnsubscribe)).subscribe(
       ([{ launches }, { statuses }, { status: currentStatusId }]) => {
         this.launches = [ ...launches ];
         this.status = currentStatusId;

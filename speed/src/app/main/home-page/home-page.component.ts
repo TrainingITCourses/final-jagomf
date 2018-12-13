@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { State } from '../../reducers';
 import { LoadStatuss } from '../../reducers/status.actions';
 import { LoadLaunchs } from '../../reducers/launch.actions';
-import { forkJoin } from 'rxjs';
+import { combineLatest } from 'rxjs';
 import { Status } from '../../models/status';
 import { Launch } from '../../models/launch';
 import { TitleService } from '../../title.service';
@@ -36,7 +36,7 @@ export class HomePageComponent implements OnInit {
   observeValues() {
     const statuses$ = this.globalStore.select('status');
     const launches$ = this.globalStore.select('launch');
-    forkJoin([statuses$, launches$]).subscribe(([{ statuses }, { launches }]) => {
+    combineLatest(statuses$, launches$).subscribe(([{ statuses }, { launches }]) => {
       this.statuses = [ ...statuses ];
       this.launches = [ ...launches ];
       this.titleService.setTitle(`Lanzamientos: ${launches.length}`);
