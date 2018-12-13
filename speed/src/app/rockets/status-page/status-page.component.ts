@@ -62,7 +62,7 @@ export class StatusPageComponent implements OnInit, OnDestroy {
     const routeParams$ = this.route.params;
     combineLatest(launch$, status$, routeParams$).pipe(takeUntil(this.ngUnsubscribe)).subscribe(
       ([{ launches }, { statuses }, { status: currentStatusId }]) => {
-        if (launches.length) {
+        if (launches.length && statuses.length) {
           this.launches = [ ...launches ];
           this.status = +currentStatusId;
           const currentStatus = statuses.find(eachStat => eachStat.id === this.status);
