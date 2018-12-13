@@ -1,0 +1,8 @@
+.main-header {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background-color: lightblue;
+  padding: 10px 0;
+}
