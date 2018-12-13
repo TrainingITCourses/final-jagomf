@@ -27,10 +27,8 @@
     {
       "name": "cache-first",
       "urls":[
-        "http://127.0.0.1:8080/assets/launchagencies.json",
-        "http://127.0.0.1:8080/assets/launchlibrary.json",
-        "http://127.0.0.1:8080/assets/launchmissions.json",
-        "http://127.0.0.1:8080/assets/launchstatus.json"
+        "http://127.0.0.1:8080/assets/data/launches.json",
+        "http://127.0.0.1:8080/assets/data/launchstatus.json"
       ],
       "cacheConfig":{
         "strategy":"performance",
