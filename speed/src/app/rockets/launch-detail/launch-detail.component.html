@@ -1,0 +1,7 @@
+<ul>
+  <li>Nombre completo: {{launch.name}}</li>
+  <li>Fecha: {{launch.net | date}}</li>
+  <li>Cohete: {{launch.rocket?.name}}</li>
+  <li>País de lanzamiento: {{launch.location?.countryCode}}</li>
+  <li>Agencia: {{launch.rocket?.agencies[0]?.name}}</li>
+</ul>
