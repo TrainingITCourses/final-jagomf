@@ -9,6 +9,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve -o --port 4219",
+    "start:prod": "http-server ./dist/speed/ -c-1",
+    "build:start:prod": "npm run build && npm run start:prod",
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
